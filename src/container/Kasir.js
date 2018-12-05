@@ -15,6 +15,11 @@ export default class Example extends React.Component {
                 namabrg: "Laptop",
                 harga: 10000,
                 qty: 3
+            },
+            {
+                namabrg: "Laptop",
+                harga: 10000,
+                qty: 3
             }
         ]
     }
