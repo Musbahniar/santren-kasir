@@ -4,6 +4,20 @@ import {
     Button, Form, FormGroup, Label, Input, FormText, Card } from 'reactstrap';
 
 export default class Example extends React.Component {
+    state = {
+        data:[
+            {
+                namabrg: "HP",
+                harga: 12000,
+                qty: 3
+            },
+            {
+                namabrg: "Laptop",
+                harga: 10000,
+                qty: 3
+            }
+        ]
+    }
   render() {
     return (
         <Row>
@@ -21,12 +35,19 @@ export default class Example extends React.Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr>
+                                {
+                                    this.state.data.map((datas, key)=>{
+                                        return (
+                                            <tr>
+                                            <th scope="row">{key + 1}</th>
+                                            <td>{datas.namabrg}</td>
+                                            <td>{datas.harga}</td>
+                                            <td>{datas.qty}</td>
+                                            <td>{datas.qty * datas.harga}</td>
+                                            </tr>
+                                        )
+                                    })
+                                }
                             </tbody>
                         </Table>
                     </Col>
@@ -56,7 +77,7 @@ export default class Example extends React.Component {
                         </FormGroup>
                         <FormGroup>
                             <Label for="Harga">Harga Barang</Label>
-                            <Input type="text" name="harga" id="harga" placeholder="Harga Barang" />
+                            <Input type="number" name="harga" id="harga" placeholder="Harga Barang" />
                         </FormGroup>
                         <FormGroup>
                             <Label for="Qty">Qty</Label>
