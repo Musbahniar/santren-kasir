@@ -5,25 +5,35 @@ import {
 
 export default class Example extends React.Component {
     state = {
-        data:[
-            {
-                namabrg: "HP",
-                harga: 12000,
-                qty: 3
-            },
-            {
-                namabrg: "Laptop",
-                harga: 10000,
-                qty: 3
-            },
-            {
-                namabrg: "Laptop",
-                harga: 10000,
-                qty: 3
-            }
-        ]
+        data:[] ,
+        namabrg: '',
+        harga: 0,
+        qty: 0
     }
+
+    handleChange = e => {
+        this.setState ({
+            [e.target.name]: e.target.value
+        });
+    }; 
+
+    handleSubmit = () => {
+        const {data ,namabrg, harga, qty} = this.state;
+        let newData = {
+            namabrg: namabrg,
+            harga: harga,
+            qty: qty,
+            jumlah: harga * qty
+        };
+        data.push(newData);
+        this.setState({
+            data
+        });
+    };
+
   render() {
+    //   const {namabrg} = this.state;
+    //   console.log (namabrg);
     return (
         <Row>
             <Col md={6}>
@@ -48,7 +58,7 @@ export default class Example extends React.Component {
                                             <td>{datas.namabrg}</td>
                                             <td>{datas.harga}</td>
                                             <td>{datas.qty}</td>
-                                            <td>{datas.qty * datas.harga}</td>
+                                            <td>{datas.jumlah}</td>
                                             </tr>
                                         )
                                     })
@@ -78,17 +88,17 @@ export default class Example extends React.Component {
                     <Form>
                         <FormGroup>
                             <Label for="Nama Barang">Nama Barang</Label>
-                            <Input type="text" name="namabrg" id="namabrg" placeholder="Nama Barang" />
+                            <Input type="text" name="namabrg" id="namabrg" placeholder="Nama Barang" onChange={this.handleChange}/>
                         </FormGroup>
                         <FormGroup>
                             <Label for="Harga">Harga Barang</Label>
-                            <Input type="number" name="harga" id="harga" placeholder="Harga Barang" />
+                            <Input type="number" name="harga" id="harga" placeholder="Harga Barang" onChange={this.handleChange}/>
                         </FormGroup>
                         <FormGroup>
                             <Label for="Qty">Qty</Label>
-                            <Input type="number" name="qty" id="qty" placeholder="Qty" />
+                            <Input type="number" name="qty" id="qty" placeholder="Qty" onChange={this.handleChange}/>
                         </FormGroup>
-                        <Button color="secondary">Simpan</Button>{' '}
+                        <Button color="secondary" onClick={()=> this.handleSubmit()}>Simpan</Button>{' '}
                     </Form>
                 </Card>
             </Col>
